@@ -1,24 +1,42 @@
 
 html,
 body {
+	position: fixed;
+	background-color: #808080;
   height: 100%;
   width: calc(100vw - 2px);
   margin: 0;
 }
 
-.btn {
+button {
 	border-radius: 7px;
-	background-color: #4CAF50; /* Green */
-	border: 1px solid #00A300;
+	background-color: #686868; 
+	border: 1px solid #585858;
 	color: white;
-	padding: 5px 10px;
+	padding: 2px 6px;
 	text-align: center;
 	text-decoration: none;
 	font-family: "Consolas";
 	font-weight: bold;
 	display: inline-block;
 	font-size: 16px;
+
+	transform: perspective(400px);
+
+	transition: transform 100ms cubic-bezier(0, 0.75, 0.9, 1)
 }
+
+button:hover {
+	background-color: #484848;
+	transform: perspective(400px) translateZ(20px);
+}
+
+button:active {
+	background-color: #383838;
+	transform: perspective(400px) translateZ(-50px);
+}
+
+button:focus {outline:0;}
 
 #mainContent {
 	
@@ -38,12 +56,19 @@ body {
 }
 
 #menu div[id="scaledVisibleText"] {
-	position: absolute;
-
+	position: fixed;
 	margin-top: 0px;
 	transform: scale(1);
 	transform-origin: left;
 	font-family: sans-serif;
+	transition: all 200ms cubic-bezier(0, 0.75, 0.9, 1);
+}
+
+#menu div[id="notVisible"] {
+	position: relative;
+	width: inherit;
+	visibility: hidden;
+	opacity: 0;
 	transition: all 200ms cubic-bezier(0, 0.75, 0.9, 1);
 }
 
@@ -56,9 +81,8 @@ body {
 	flex-grow: 1;
 
 	border: 1px solid black;
-	transition: all 250ms cubic-bezier(0, 0.75, 0.9, 1);
+	transition: top 250ms cubic-bezier(0, 0.75, 0.9, 1);
 }
-
 
 #menu:hover {
 	height: 400px;
@@ -70,7 +94,29 @@ body {
 	margin-top: 5px;
 }
 
+#menu:hover div[id="notVisible"] {
+	visibility: visible;
+	opacity: 1;
+}
 
 #menu:hover ~ #editorDiv {
 	top: 400px;
+}
+
+#menu:hover ~ #editorDiv > .obscure{
+	background-color: rgba(1,1,1,0.5);
+}
+
+.obscure {
+	position: fixed;
+	top: auto;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(1,1,1,0);
+	transition: all 250ms cubic-bezier(0, 0.75, 0.9, 1);
+}
+
+.roundbox {
+	
 }
