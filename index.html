@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html oncontextmenu="return false;">
 <head>
 	<title>SNED - Super Noob Editor Dude!</title>
 	<link rel="stylesheet" href="main.css">
@@ -7,10 +7,39 @@
 <body>
 	<div id="mainContent">
 		<div id="menu">
-			<div id="scaledVisibleText" style="font-size: 14pt;">Menu, you aren't gay as they say. ☺</div>
-			<div id="notVisible" style="top: 37.5px; left: 5px;">
-				<button style="height: 350px;"><</button></div>
-				
+			<div id="scaledVisibleText" style="font-size: 18pt;"><strong>Menu</strong></div>
+				<div id="notVisible" style="top: 37.5px;">
+					<button class="sectionButtonMode" id="sbm1" value="0" style="top: calc(30px * 0);" onclick="setMode(0);">&nbsp;World&nbsp;</button>
+					<button class="sectionButtonMode" id="sbm2" value="1" style="top: calc(30px * 1);" onclick="setMode(1);">&nbsp;Level&nbsp;</button>
+					<button class="sectionButtonMode" id="sbm2" value="2" style="top: calc(30px * 2);" onclick="setMode(2);">&nbsp;Zones&nbsp;</button>
+					<button class="sectionButtonMode" id="sbm2" value="3" style="top: calc(30px * 3);" onclick="setMode(3);">&nbsp;Tiles&nbsp;</button>
+					<button class="sectionButtonMode" id="sbm2" value="4" style="top: calc(30px * 4);" onclick="setMode(4);">Objects</button>
+					<button class="sectionButtonMode" id="sbm2" value="5" style="top: calc(30px * 5);" onclick="setMode(5);">&nbsp;Warps&nbsp;</button>
+					<button class="sectionButtonMode" id="sbm2" value="6" style="top: calc(30px * 6);" onclick="setMode(6);">Ref img</button>
+					<div id="modeDiv" class="roundbox">
+						<div id="worldDiv" class="imodeDiv" style="top: calc(342px * 0);">
+							World div
+						</div>
+						<div id="levelDiv" class="imodeDiv" style="top: calc(342px * 1);">
+							Level div
+						</div>
+						<div id="zonesDiv" class="imodeDiv" style="top: calc(342px * 2);">
+							Zones div
+						</div>
+						<div id="tilesDiv" class="imodeDiv" style="top: calc(342px * 3);">
+							Tiles div
+						</div>
+						<div id="objectsDiv" class="imodeDiv" style="top: calc(342px * 4);">
+							Objects div
+						</div>
+						<div id="warpsDiv" class="imodeDiv" style="top: calc(342px * 5);">
+							Warps div
+						</div>
+						<div id="refimgDiv" class="imodeDiv" style="top: calc(342px * 6);">
+							Refimg div
+						</div>
+					</div>
+				</div>
 			</div>
 		<div id="editorDiv">
 			<div class="obscure"></div>

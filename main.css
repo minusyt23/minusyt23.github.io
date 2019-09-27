@@ -38,6 +38,23 @@ button:active {
 
 button:focus {outline:0;}
 
+.sectionButtonMode {
+	position: absolute;
+	left: 5px;
+}
+
+.imodeDiv {
+	position: absolute;
+	height: 342px;
+}
+
+#modeDiv {
+	position: relative; 
+	top: 0px; left: 90px; width: calc(100vw - 110px); height: 342px;
+	background-color: #808080;
+	overflow: hidden;
+}
+
 #mainContent {
 	
 	display: flex;
@@ -47,15 +64,18 @@ button:focus {outline:0;}
 }
 
 #menu {
-
 	width: 100%;
-	height: 130px;
+	height: 28px;
 	border: 1px solid black;
 	background-color: rgba(55,141,173,0.5);
+	
 	transition: all 250ms cubic-bezier(0, 0.75, 0.9, 1);
+
+	overflow: hidden;
 }
 
 #menu div[id="scaledVisibleText"] {
+	position: relative;
 	position: fixed;
 	margin-top: 0px;
 	transform: scale(1);
@@ -74,7 +94,7 @@ button:focus {outline:0;}
 
 #editorDiv {
 
-	top: 130px;
+	top: 22px;
 	left: 0px;
 	width: calc(100vw - 2px);
 
@@ -104,12 +124,14 @@ button:focus {outline:0;}
 }
 
 #menu:hover ~ #editorDiv > .obscure{
+	visibility: visible;
 	background-color: rgba(1,1,1,0.5);
 }
 
 .obscure {
 	position: fixed;
 	top: auto;
+	visibility: hidden;
 	left: 0;
 	width: 100%;
 	height: 100%;
@@ -118,5 +140,6 @@ button:focus {outline:0;}
 }
 
 .roundbox {
-	
+	border-radius: 10px;
+	border: 3px solid black;
 }
