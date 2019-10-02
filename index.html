@@ -24,7 +24,14 @@
 					<button class="sectionButtonMode" id="sbm2" value="8" style="top: calc(30px * 8);" onclick="setMode(8);">&nbsp;Mario&nbsp;</button>
 					<div id="modeDiv" class="roundbox">
 						<div id="worldDiv" class="imodeDiv" style="top: calc(342px * 0);">
-							World div
+							<label>Tilesheet source</label>
+							<input type="text" name="mapsource" style="position:absolute; left: 155px; width: calc(47% - 155px);"
+							value = "http://marioroyale.cyuubi.gq/img/game/smb_map.png"
+							onchange="json.resource[0].src = mapsrcinput.value; mapimg.src = mapsrcinput.value; requestAnimationFrame(updateCall);">
+							<label style="position:absolute; left: 47%;">Object sheet source</label>
+							<input type="text" name="objsource" style="position:absolute; left: calc(47% + 180px); width: calc(53% - 185px);"
+							value = "http://marioroyale.cyuubi.gq/img/game/smb_obj.png"
+							onchange="json.resource[1].src = objsrcinput.value; objimg.src = objsrcinput.value; requestAnimationFrame(updateCall);">
 						</div>
 						<div id="levelDiv" class="imodeDiv" style="top: calc(342px * 1);">
 							Level div
@@ -59,17 +66,20 @@
 				</div>
 			</div>
 		<div id="editorDiv">
-			<div id="largeCanvas">
+			<div id="largeCanvas" style="background: #808080;">
 				<div id="scrollCanvas">
 					<canvas id="visualCanvas" style="position: relative;"></canvas>
 				</div>
 			</div>
-			
+			<div id="toolDiv">
+				<label>Helpful!</label>
+			</div>
 		</div>
+
 	</div>
 
-	<script src="js/editor.js"></script>
 	<script src="js/elemHacks.js"></script>
+	<script src="js/editor.js"></script>
 	<script src="js/listeners.js"></script>
 
 </body>

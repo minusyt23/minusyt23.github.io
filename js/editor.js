@@ -2,10 +2,14 @@ var menuDiv = document.getElementById("menu");
 var editorDiv = document.getElementById("editorDiv");
 var largeCanvasDiv = document.getElementById("largeCanvas");
 var scrollCanvasDiv = document.getElementById("scrollCanvas");
+
 var modeDiv = document.getElementById("modeDiv");
 var recentDiv = document.getElementById("recentDiv");
+var toolDiv = document.getElementById("toolDiv");
 
 var recentfileDiv = document.getElementById("recentDiv");
+var mapsrcinput = document.getElementsByName("mapsource")[0];
+var objsrcinput = document.getElementsByName("objsource")[0];
 
 var json = JSON.parse('{"type":"game","mode":"royale","shortname":"1","fileid":"'+Math.random().toString(16).substr(2,8)+Math.random().toString(16).substr(2,8)+'","resource":[{"id":"map","src":"img/game/smb_map.png"},{"id":"obj","src":"img/game/smb_obj.png"}], "initial": 0, "world": [{"id": 0, "name": "World 1", "initial": 0, "zone": [{"id": 0, "initial": 196608, "color": "#6B8CFF", "music": "music/main0.mp3", "layers": [{"z": 0, "data": [[0, 1],[30, 30]]}, {"z": 1, "data": [[30, 30],[2, 3]]}], "obj": [], "warp": []}]}]}');
 
@@ -27,6 +31,16 @@ function GPI(spr_index){var x = spr_index % (mapimg.width / 16);return [x*16,((s
 function A2W(array) {return array[0].length;};
 function A2H(array) {return array.length;};
 
+function A2C(src,dest,posXSrc,posYSrc,posXDest,posYDest,xSize,ySize)
+{
+	for (var y = 0; y < ySize; y++) {
+		for (var x = 0; x < xSize; x++) {
+			dest[posYDest+y][posXDest+x] = src[posYSrc+y][posXSrc+x];
+		}
+	}
+	return dest;
+};
+
 editor = new ed();
 recent = new rec();
 
@@ -38,13 +52,19 @@ function ed ()
 
 	this.scale = 2;
 
+	this.mousePos = [0,0];
+	this.mLC = false;
+
 	this.xoffset = 0;
+	this.yoffset = 3;
 
 	this.l = 0;
 	this.z = 0;
 	this.y = 0;
 
 	this.zdata = json.world[this.l].zone[this.z];
+
+	this.b = [[0]];
 };
 
 ed.prototype.clearScreen = function (color)
@@ -63,7 +83,7 @@ ed.prototype.drawMap = function ()
 			for (var x = (this.RF(visualCanvas.clientWidth) >= A2W(this.zdata.layers[l].data)) ? 0 : this.xoffset; 
 				(this.RF(visualCanvas.clientWidth) >= A2W(this.zdata.layers[this.y].data)) ? x < A2W(this.zdata.layers[this.y].data) : x < this.RF(visualCanvas.clientWidth)+this.xoffset; x++) {
 					this.display.drawImage(mapimg,...GPI(DTD(this.zdata.layers[l].data[y][x]).spi),16,16,
-										   this.SF(x)-this.SF(this.xoffset),this.SF(y),this.SF(),this.SF());
+										   this.SF(x)-this.SF(this.xoffset),this.SF(y)+this.SF(this.yoffset),this.SF(),this.SF());
 			}
 		}
 	}
@@ -75,7 +95,20 @@ ed.prototype.update = function ()
 	this.zdata = json.world[this.l].zone[this.z];
 	this.clearScreen(this.zdata.color);
 	this.drawMap();
+	this.display.globalAlpha = 1;
+	this.display.strokeRect(this.GTPF().x,this.GTPF().y,this.SF(A2W(this.b)),this.SF(A2H(this.b)));
 };
+
+ed.prototype.place = function ()
+{
+	this.zdata.layers[this.y].data = A2C(this.b,this.zdata.layers[this.y].data,0,0,this.GTP().x,this.GTP().y,A2W(this.b),A2H(this.b));
+};
+
+ed.prototype.pick = function ()
+{
+
+};
+
 
 ed.prototype.S = function(num = 1)  // SCALED
 {
@@ -89,12 +122,22 @@ ed.prototype.SF = function(num = 1) // SCALED FIXED
 
 ed.prototype.R = function(num = 1) // ROUNDED
 {
-	return Math.floor(num/this.scale);
+	return (num/this.scale)|0;
 };
 
 ed.prototype.RF = function(num = 1) // ROUNDED FIXED
 {
-	return Math.floor(num/(16*this.scale));
+	return (num/(16*this.scale))|0;
+};
+
+ed.prototype.GTP = function() // GET TILE POS
+{
+	return {x: this.RF(this.mousePos[0])+this.xoffset, y: this.RF(this.mousePos[1])-this.yoffset-1};
+};
+
+ed.prototype.GTPF = function() // GET TILE POS FIXED
+{
+	return {x: this.SF(this.RF(this.mousePos[0])), y: this.SF(this.RF(this.mousePos[1])-1)};
 };
 
 ed.prototype.resize = function ()
@@ -145,8 +188,14 @@ rec.prototype.collide = function(x,y,w,h)
 
 function updateCall ()
 {
-	editor.update();
-	recent.update();
+	if(isHover(menuDiv))
+	{
+		recent.update();
+	}
+	else 
+	{
+		editor.update();
+	};
 	requestAnimationFrame(updateCall);
 };
 
