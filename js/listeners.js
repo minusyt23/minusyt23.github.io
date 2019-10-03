@@ -1,14 +1,45 @@
 function editorMouseMoveCall(event)
 {
-	editor.mousePos = [event.clientX,event.clientY]
-	if (editor.mLC) {editor.place();}
+	editor.mousePos = [event.clientX,event.clientY];
+	if (editor.mLC) {editor.place();};
+	if (!(editor.mRC)) {editor.omP = [event.clientX,event.clientY];}
+	else {editor.pick();};
 };
 
+editor.canvas.addEventListener("mousemove", editorMouseMoveCall);
+editor.canvas.addEventListener("mousedown", function(event)
+	{
+		switch(event.button)
+		{
+			case 0:
+				editor.place(); editor.mLC = true; break;
+			case 2: 
+				editor.pick(); editor.mRC = true; break;
+		}
+});
+editor.canvas.addEventListener("mouseup", function(event)
+	{
+		switch(event.button)
+		{
+			case 0:
+				editor.mLC = false; break;
+			case 2:
+				editor.mRC = false; break;
+		}
+	
+});
 
-
-editor.canvas.addEventListener("mousemove", editorMouseMoveCall)
-editor.canvas.addEventListener("mousedown", function(){if(event.button === 0) {editor.place(); editor.mLC = true;}})
-editor.canvas.addEventListener("mouseup", function(){if(event.button === 0) {editor.mLC = false;}})
+editor.canvas.addEventListener("wheel", function(event){
+	largeCanvasDiv.scrollLeft -= Math.sign(event.deltaY)*256;
+	/*
+	editor.scale += Math.sign(event.deltaY)*2;
+	
+	if(editor.scale > 16) editor.scale = 16;
+	if(editor.scale < 2) editor.scale = 2;
+	
+	setScrollbar();
+	*/
+});
 
 editor.resize()
 function resizeCall (event)

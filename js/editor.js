@@ -35,11 +35,21 @@ function A2C(src,dest,posXSrc,posYSrc,posXDest,posYDest,xSize,ySize)
 {
 	for (var y = 0; y < ySize; y++) {
 		for (var x = 0; x < xSize; x++) {
-			dest[posYDest+y][posXDest+x] = src[posYSrc+y][posXSrc+x];
+			if(posYDest + y < A2H(dest) && posYDest >= 0 - y) dest[posYDest+y][posXDest+x] = src[posYSrc+y][posXSrc+x];
 		}
 	}
 	return dest;
 };
+
+function A2E(array, sizeX, sizeY, cvalue = 30) {
+	temparray = Array(sizeY).fill(0).map(x => Array(sizeX).fill(cvalue))
+		for (var y = 0 ; (sizeY > A2H(array)) ? y < A2H(array) : y < sizeY; y++) {
+			for (var x = 0 ; (sizeX > A2W(array)) ? x < A2W(array) : x < sizeX; x++) {
+				temparray[y][x] = array[y][x];
+			}
+		}
+	return temparray;
+}
 
 editor = new ed();
 recent = new rec();
@@ -53,10 +63,12 @@ function ed ()
 	this.scale = 2;
 
 	this.mousePos = [0,0];
+	this.omP = [0,0];
 	this.mLC = false;
+	this.mRC = false;
 
 	this.xoffset = 0;
-	this.yoffset = 3;
+	this.yoffset = 2;
 
 	this.l = 0;
 	this.z = 0;
@@ -64,7 +76,7 @@ function ed ()
 
 	this.zdata = json.world[this.l].zone[this.z];
 
-	this.b = [[0]];
+	this.b = [[554,0b10010101101],[0xfa,2904389]];
 };
 
 ed.prototype.clearScreen = function (color)
@@ -82,8 +94,8 @@ ed.prototype.drawMap = function ()
 		for (var y = 0; y < A2H(this.zdata.layers[l].data); y++) {
 			for (var x = (this.RF(visualCanvas.clientWidth) >= A2W(this.zdata.layers[l].data)) ? 0 : this.xoffset; 
 				(this.RF(visualCanvas.clientWidth) >= A2W(this.zdata.layers[this.y].data)) ? x < A2W(this.zdata.layers[this.y].data) : x < this.RF(visualCanvas.clientWidth)+this.xoffset; x++) {
-					this.display.drawImage(mapimg,...GPI(DTD(this.zdata.layers[l].data[y][x]).spi),16,16,
-										   this.SF(x)-this.SF(this.xoffset),this.SF(y)+this.SF(this.yoffset),this.SF(),this.SF());
+this.display.drawImage(mapimg,...GPI(DTD(this.zdata.layers[l].data[y][x]).spi),16,16,
+this.SF(x)-this.SF(this.xoffset),this.SF(y)+this.SF(this.yoffset),this.SF(),this.SF());
 			}
 		}
 	}
@@ -96,7 +108,8 @@ ed.prototype.update = function ()
 	this.clearScreen(this.zdata.color);
 	this.drawMap();
 	this.display.globalAlpha = 1;
-	this.display.strokeRect(this.GTPF().x,this.GTPF().y,this.SF(A2W(this.b)),this.SF(A2H(this.b)));
+	this.mRC ? this.display.strokeRect(this.GTPF(this.omP).x,this.GTPF(this.omP).y,this.SF(A2W(this.b)),this.SF(A2H(this.b)))
+	: this.display.strokeRect(this.GTPF().x,this.GTPF().y,this.SF(A2W(this.b)),this.SF(A2H(this.b)));
 };
 
 ed.prototype.place = function ()
@@ -106,7 +119,12 @@ ed.prototype.place = function ()
 
 ed.prototype.pick = function ()
 {
-
+	if(this.GTP(this.omP).y < 0) return;
+	var distX = this.GTP().x - this.GTP(this.omP).x > 0 ? this.GTP().x - this.GTP(this.omP).x : 1;
+	var distY = this.GTP().y - this.GTP(this.omP).y > 0 ? this.GTP().y - this.GTP(this.omP).y : 1;
+	if(this.GTP().y >= A2H(this.zdata.layers[this.y].data)) distY = A2H(this.zdata.layers[this.y].data) - this.GTP(this.omP).y;
+	this.b = A2E(this.b,distX,distY);
+	this.b = A2C(this.zdata.layers[this.y].data,this.b,this.GTP(this.omP).x,this.GTP(this.omP).y,0,0,distX,distY);
 };
 
 
@@ -130,14 +148,14 @@ ed.prototype.RF = function(num = 1) // ROUNDED FIXED
 	return (num/(16*this.scale))|0;
 };
 
-ed.prototype.GTP = function() // GET TILE POS
+ed.prototype.GTP = function(pos = this.mousePos) // GET TILE POS
 {
-	return {x: this.RF(this.mousePos[0])+this.xoffset, y: this.RF(this.mousePos[1])-this.yoffset-1};
+	return {x: this.RF(pos[0])+this.xoffset, y: this.RF(pos[1])-this.yoffset-1};
 };
 
-ed.prototype.GTPF = function() // GET TILE POS FIXED
+ed.prototype.GTPF = function(pos = this.mousePos) // GET TILE POS FIXED
 {
-	return {x: this.SF(this.RF(this.mousePos[0])), y: this.SF(this.RF(this.mousePos[1])-1)};
+	return {x: this.SF(this.RF(pos[0])), y: this.SF(this.RF(pos[1])-1)};
 };
 
 ed.prototype.resize = function ()
