@@ -12,6 +12,12 @@ html, body {
 	margin: 0;
 }
 
+@media screen and (max-width: 600px) {
+	html, body {
+		font-size: 12pt;
+	}
+}
+
 /* Bar css */
 
 .bar {
