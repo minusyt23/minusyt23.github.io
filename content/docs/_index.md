@@ -1,6 +1,6 @@
 ---
 title: Docs
-weight: 1
+weight: 2
 prev: /
 next: /docs/getting-started
 ---

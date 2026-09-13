@@ -1,6 +1,6 @@
 ---
 title: Blog
-weight: 2
+weight: 1
 breadcrumbs: false
 sidebar:
   # cascade below hides the posts from the sidebar tree; this keeps the
