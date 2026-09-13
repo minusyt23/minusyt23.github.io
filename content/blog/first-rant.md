@@ -38,7 +38,7 @@ sheepy tested the patch with her AX210 and confirmed it worked. I couldn't test 
 
 ### Moloch or LAR
 
-Radio equipment has been in use for ages, for all sorts of purposes: entertainment, toys, communication, all sorta stuff. Militaries were the very first to adopt the new technology. After that, your household stereo/cassette player. Then airplanes, then TV, etc. etc... What I'm trying to say is that all of this stuff was too important to be left to the public. Therefore: **regulations**.
+Radio equipment has been in use for ages, for all sorts of purposes: entertainment, toys, communication, all sorta stuff. Ships and navies got there first, back when radio was just telegraphy through the air. Then airplanes, then the household radio set, then TV, etc. etc... And the more stuff piled onto the air, the more it all stepped on each other: in 1912 amateur chatter famously got in the way of the Titanic's distress calls, and the first real radio laws followed within months. Spectrum is shared and finite, and nobody gets to use it if everybody just transmits whatever they want. Therefore: **regulations**.
 
 I'm not against them, don't get me wrong. I'm against Intel.
 
