@@ -110,3 +110,36 @@
 .sidebar-container li:not(:has(> div > ul > li)) .hextra-sidebar-collapsible-button {
   display: none;
 }
+
+/* Selected items keep their normal weight. The theme bolds them, which makes
+   the item wider - and since the sidebar is sized to its content, the whole
+   column jumped a few pixels every time you navigated. */
+.sidebar-container .sidebar-active-item {
+  font-weight: inherit;
+}
+
+/* The theme renders [[menu.sidebar]] links with active hardcoded to false, so
+   Home never highlights. Mark it on the home page, which is the only page its
+   layout renders. Colours are the theme's own active-item expressions, so they
+   follow the primary-hue variables. */
+.home-page .sidebar-container > div > ul > li:last-child > a {
+  background-color: hsl(
+    var(--primary-hue) var(--primary-saturation)
+      calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 44)
+  );
+  color: hsl(
+    var(--primary-hue) var(--primary-saturation)
+      calc(calc(var(--primary-lightness) / 50) * 32)
+  );
+}
+
+html.dark .home-page .sidebar-container > div > ul > li:last-child > a {
+  background-color: hsl(
+    var(--primary-hue) var(--primary-saturation)
+      calc(var(--primary-lightness) + calc(calc(100% - var(--primary-lightness)) / 50) * 16) / 0.1
+  );
+  color: hsl(
+    var(--primary-hue) var(--primary-saturation)
+      calc(calc(var(--primary-lightness) / 50) * 45)
+  );
+}
