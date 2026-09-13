@@ -52,6 +52,9 @@ enableInlineShortcodes = true
   [params.blog]
     [params.blog.list]
       displayTags = true
+      # Without these the theme sorts the list by weight, not date.
+      sortBy = 'date'
+      sortOrder = 'desc'
 
   [params.search]
     enable = false
