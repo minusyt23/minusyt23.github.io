@@ -40,6 +40,27 @@
     top: 0;
     max-height: 100vh;
   }
+
+  /* The theme centres every page in a max-width row, which leaves a gap to the
+     left of the sidebar. Let the row span the viewport so the sidebar sits
+     against the edge. The page's own width setting cannot do this: 'full'
+     emits a class the theme's prebuilt CSS does not contain. */
+  div:has(> .sidebar-container) {
+    max-width: none;
+  }
+}
+
+/* On phones the theme slides the drawer down from the top. Come in from the
+   left instead. The theme drives this by toggling two arbitrary-value Tailwind
+   classes, so match them on substring rather than escaping the class names. */
+@media (max-width: 767px) {
+  .sidebar-container[class*="translate3d(0,-100%,0)"] {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  .sidebar-container[class*="translate3d(0,0,0)"] {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 /* Sidebar hugs its content instead of the theme's fixed 16rem column. */
