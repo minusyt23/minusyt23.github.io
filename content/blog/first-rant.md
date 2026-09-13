@@ -82,7 +82,7 @@ The problem is, sheepy could connect her Gamepad to her PC over high 5 GHz, and 
 
 TODO: WRITE THIS SECTION BETTER
 
-Why couldn't I connect? REGULATIONS, ALWAYS regulations. From what I understood, back in 2012 the regulations for high 5 GHz were stricter than they are now, so the card Nintendo uses in their Gamepads and Wii Us skips them entirely.
+Why couldn't I connect? REGULATIONS, ALWAYS regulations. Every wifi device has to follow the rules of the region it's sold in, consoles included. Back in 2012 the regulations for high 5 GHz were stricter than they are now, and in the EU that band was never really a wifi band to begin with, so my European Gamepad straight up skips channels 149 to 165. I tested this to death. sheepy and Famidawg have US consoles, which got the whole band, and that is the entire reason it works for them and not for me.
 
 Funny how Intel believes the opposite. On one hand I've got a modern device that thinks low 5 GHz is bad; on the other, an old device that thinks high 5 GHz is bad. FUUUUUUUUUUCKKKKKKKKKK
 
