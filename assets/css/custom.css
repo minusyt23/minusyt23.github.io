@@ -106,8 +106,12 @@
 /* Blog's posts are excluded from the tree (see content/blog/_index.md), but
    the theme still draws a collapse chevron because the section does have
    pages - it even emits an empty <ul>, since it tests the page list before
-   applying the exclude filter. Drop the chevron where that list has no items. */
-.sidebar-container li:not(:has(> div > ul > li)) .hextra-sidebar-collapsible-button {
+   applying the exclude filter. Drop the chevron where that list has no items,
+   and the empty subtree with it: on /blog/ the section is the current page, so
+   it carries the open class and the theme pads the empty subtree open, leaving
+   a gap under the link. */
+.sidebar-container li:not(:has(> div > ul > li)) .hextra-sidebar-collapsible-button,
+.sidebar-container li:not(:has(> div > ul > li)) > div {
   display: none;
 }
 
