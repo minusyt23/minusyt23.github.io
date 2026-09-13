@@ -44,11 +44,11 @@ I'm not against them, don't get me wrong. I'm against Intel.
 
 Wifi has regulations too: some regions of the world let you have 5 GHz wifi, some don't, some only block a specific frequency... It's fairly complicated, but both routers and wifi cards have to comply somehow.
 
-Fun fact about me: I live in Italy, so I get the EU rules, and the EU cuts 5 GHz into pieces with different strings attached. The rules themselves come from the EU, while [ETSI](https://www.etsi.org/about/) writes the standard your card gets tested against.
+Fun fact about me: I live in Italy, so I get the EU rules, and the EU chops 5 GHz into pieces. ([ETSI](https://www.etsi.org/about/) writes the test your card has to pass.)
 
-Low 5 GHz (channels 36 to 48) is the friendly one: nothing special required, but it's **indoor only**. The middle of the band is fine too, as long as your gear watches out for weather radar and turns its power down when it can.
+Low 5 GHz (36 to 48) is the friendly one: no hoops, but **indoor only**. The middle is fine too, as long as your gear dodges weather radar and keeps its power down.
 
-High 5 GHz (149 to 165)? In Europe that was never really a wifi band. You're technically allowed to transmit there, but at roughly **an eighth** of the power you get on low 5 GHz, which is worthless for actual wifi. The EU looked into opening it up properly and decided not to bother. It only got written into the wifi standard at the end of 2024.
+High 5 GHz (149 to 165)? Never really a wifi band here. You can transmit, sure, at **an eighth** of the power, which is useless. The EU looked at opening it up properly and couldn't be bothered; it only got into the standard at the end of 2024.
 
 What's the deal with all this sparse information? Why am I lecturing you about regulations? Well, because Intel fucked up bad.
 
@@ -56,9 +56,9 @@ To comply with regulations back then, the OS used to tell the card its region, a
 
 What it does is very simple: it scans the area, looks at the routers nearby, checks their country code (two bytes sent by the router) and, with a magic formula we will never know, automatically picks the region for you.
 
-Sounds smart on the surface. Shame it's unreliable as fuck for some people (picking Indonesian/Chinese regulations when living in the US) and straight up wrong for others, like me.
+Sounds smart on the surface. A shame it's unreliable as fuck for some people (picking Indonesian/Chinese regulations when living in the US) and straight up wrong for others, like me.
 
-In very few words: **Intel believes that Italy can't use low 5 GHz networks**.
+In very few words: **Intel believes that Italy can't make low 5 GHz hotspots** (if not connected to a router with the same frequency), while everything's free for high 5 GHz stuff.
 
 "Why the bitching?" one might ask, and I'll let them in on a secret: Intel wifi cards are the best for Linux. They're the best supported. They have the best stability. Why Intel would do something like this to all of us geeks, we'll never know.
 
