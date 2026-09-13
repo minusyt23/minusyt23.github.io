@@ -51,6 +51,24 @@
   div:has(> .sidebar-container) {
     max-width: none;
   }
+
+  /* The theme sizes the scrolling part of the sidebar as
+     100vh - navbar - menu, where --menu-height is a guess at the height of the
+     theme switch below it - and it is 1px short, because that row has a top
+     border. The result is a sidebar 1px taller than the viewport and a
+     scrollbar on every page. Let flex do the arithmetic instead: pin the
+     sidebar to the viewport and let the scroll area take whatever is left. */
+  .sidebar-container {
+    /* The theme's sticky offset is a literal 4rem (md:top-16), not derived
+       from --navbar-height, so zeroing that variable does not reach it. */
+    top: 0;
+    height: 100vh;
+  }
+
+  .sidebar-container > .hextra-scrollbar {
+    height: auto;
+    min-height: 0;
+  }
 }
 
 /* On phones the theme slides the drawer down from the top. Come in from the
