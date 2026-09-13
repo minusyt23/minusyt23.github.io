@@ -44,9 +44,11 @@ I'm not against them, don't get me wrong. I'm against Intel.
 
 Wifi has regulations too: some regions of the world let you have 5 GHz wifi, some don't, some only block a specific frequency... It's fairly complicated, but both routers and wifi cards have to comply somehow.
 
-Fun fact about me: I live in Italy, so I get the EU rules. CEPT and the European Commission decide what the spectrum is for, and [ETSI](https://www.etsi.org/about/) writes the standard your card actually gets tested against, EN 301 893. It covers three chunks of 5 GHz: 5150 to 5250 MHz (channels 36 to 48), 5250 to 5350 (52 to 64) and 5470 to 5725 (100 to 140). The low chunk is the friendly one, no DFS and no TPC needed, but it's **indoor only** and capped at 200 mW. The other two want both.
+Fun fact about me: I live in Italy, so I get the EU rules, and the EU cuts 5 GHz into pieces with different strings attached. The rules themselves come from the EU, while [ETSI](https://www.etsi.org/about/) writes the standard your card gets tested against.
 
-Channels 149 to 165 aren't on that list, and it's not an oversight. 5725 to 5875 is the ISM band, and in Europe you get it under the generic short range device rules at **25 mW**, an eighth of what you're allowed indoors on channel 36. CEPT studied opening it up for wifi properly and concluded that no harmonisation measure was planned. It only landed in EN 301 893 as a fourth sub-band at the end of 2024, applicable from August 2025.
+Low 5 GHz (channels 36 to 48) is the friendly one: nothing special required, but it's **indoor only**. The middle of the band is fine too, as long as your gear watches out for weather radar and turns its power down when it can.
+
+High 5 GHz (149 to 165)? In Europe that was never really a wifi band. You're technically allowed to transmit there, but at roughly **an eighth** of the power you get on low 5 GHz, which is worthless for actual wifi. The EU looked into opening it up properly and decided not to bother. It only got written into the wifi standard at the end of 2024.
 
 What's the deal with all this sparse information? Why am I lecturing you about regulations? Well, because Intel fucked up bad.
 
