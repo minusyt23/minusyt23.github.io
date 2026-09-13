@@ -44,7 +44,9 @@ I'm not against them, don't get me wrong. I'm against Intel.
 
 Wifi has regulations too: some regions of the world let you have 5 GHz wifi, some don't, some only block a specific frequency... It's fairly complicated, but both routers and wifi cards have to comply somehow.
 
-Fun fact about me: I live in Italy, and EU wifi regulations are set by [ETSI](https://www.etsi.org/about/). For 5 GHz wifi, ETSI permits low (channels 36 to 48) and high (channels 149 to 165) networks to work without extra requirements (namely DFS and TPC).
+Fun fact about me: I live in Italy, so I get the EU rules. CEPT and the European Commission decide what the spectrum is for, and [ETSI](https://www.etsi.org/about/) writes the standard your card actually gets tested against, EN 301 893. It covers three chunks of 5 GHz: 5150 to 5250 MHz (channels 36 to 48), 5250 to 5350 (52 to 64) and 5470 to 5725 (100 to 140). The low chunk is the friendly one, no DFS and no TPC needed, but it's **indoor only** and capped at 200 mW. The other two want both.
+
+Channels 149 to 165 aren't on that list, and it's not an oversight. 5725 to 5875 is the ISM band, and in Europe you get it under the generic short range device rules at **25 mW**, an eighth of what you're allowed indoors on channel 36. CEPT studied opening it up for wifi properly and concluded that no harmonisation measure was planned. It only landed in EN 301 893 as a fourth sub-band at the end of 2024, applicable from August 2025.
 
 What's the deal with all this sparse information? Why am I lecturing you about regulations? Well, because Intel fucked up bad.
 
@@ -82,7 +84,7 @@ The problem is, sheepy could connect her Gamepad to her PC over high 5 GHz, and 
 
 TODO: WRITE THIS SECTION BETTER
 
-Why couldn't I connect? REGULATIONS, ALWAYS regulations. Every wifi device has to follow the rules of the region it's sold in, consoles included. Back in 2012 the regulations for high 5 GHz were stricter than they are now, and in the EU that band was never really a wifi band to begin with, so my European Gamepad straight up skips channels 149 to 165. I tested this to death. sheepy and Famidawg have US consoles, which got the whole band, and that is the entire reason it works for them and not for me.
+Why couldn't I connect? REGULATIONS, ALWAYS regulations. Every wifi device has to follow the rules of the region it's sold in, consoles included. Back in 2012 the regulations for high 5 GHz were stricter than they are now, and as covered above, in the EU that band wasn't a wifi band at all, so my European Gamepad straight up skips channels 149 to 165. I tested this to death. sheepy and Famidawg have US consoles, which got the whole band, and that is the entire reason it works for them and not for me.
 
 Funny how Intel believes the opposite. On one hand I've got a modern device that thinks low 5 GHz is bad; on the other, an old device that thinks high 5 GHz is bad. FUUUUUUUUUUCKKKKKKKKKK
 
