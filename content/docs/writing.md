@@ -23,6 +23,25 @@ weight: 3
 ---
 ```
 
+### Blurbs on the blog list
+
+`description` is the standfirst shown under a post's title on `/blog/`. It
+never appears on the post itself, so it is the place for a line that sets up
+the post rather than opening it:
+
+```yaml
+---
+title: First post
+date: 2026-09-13
+description: Finally, an actual website.
+---
+```
+
+Without it the list falls back to the post's own opening text, cut at
+`<!--more-->` - which means that line shows up in both places. `description`
+also becomes the page's meta description, so search results and link previews
+use it too.
+
 ## Adding a section
 
 A section is a folder under `content/` with an `_index.md`. Create one and it
