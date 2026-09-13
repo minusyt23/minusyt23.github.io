@@ -3,8 +3,6 @@ title: Docs
 weight: 1
 prev: /
 next: /docs/getting-started
-sidebar:
-  open: true
 ---
 
 Documentation for this site. Pages in this section are ordered by their

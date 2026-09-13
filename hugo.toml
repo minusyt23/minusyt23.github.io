@@ -4,7 +4,6 @@ title = 'Minus Space'
 
 enableRobotsTXT = true
 enableInlineShortcodes = true
-hasCJKLanguage = false
 
 [outputs]
   home = ['HTML']
@@ -28,33 +27,12 @@ hasCJKLanguage = false
   [caches.images]
     dir = ':cacheDir/images'
 
-# Navigation bar
-[[menu.main]]
-  identifier = 'docs'
-  name = 'Docs'
-  pageRef = '/docs'
+# Sidebar links (rendered by the theme inside the sidebar itself)
+[[menu.sidebar]]
+  identifier = 'home'
+  name = 'Home'
+  url = '/'
   weight = 1
-
-[[menu.main]]
-  identifier = 'blog'
-  name = 'Blog'
-  pageRef = '/blog'
-  weight = 2
-
-[[menu.main]]
-  identifier = 'search'
-  name = 'Search'
-  weight = 3
-  [menu.main.params]
-    type = 'search'
-
-[[menu.main]]
-  identifier = 'github'
-  name = 'GitHub'
-  url = 'https://github.com/minusyt23'
-  weight = 4
-  [menu.main.params]
-    icon = 'github'
 
 [params]
   [params.navbar]
@@ -69,18 +47,11 @@ hasCJKLanguage = false
     displayToggle = true
 
   [params.footer]
-    enable = true
-    displayCopyright = true
-    displayPoweredBy = true
-    width = 'normal'
+    enable = false
 
   [params.blog]
     [params.blog.list]
       displayTags = true
 
   [params.search]
-    enable = true
-    type = 'flexsearch'
-    [params.search.flexsearch]
-      index = 'content'
-      tokenize = 'forward'
+    enable = false

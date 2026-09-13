@@ -1,0 +1,70 @@
+/* Search is disabled site-wide, but the theme still renders the input inside
+   the mobile menu. */
+.sidebar-container .search-wrapper {
+  display: none;
+}
+
+/* No navbar anywhere. The theme has no config for this and baseof calls the
+   partial unconditionally, so CSS is the least invasive option: strip the bar
+   itself - its backdrop and title - and keep only the menu button, which is
+   what opens and closes the sidebar on phones. */
+.nav-container-blur,
+.nav-container nav > a {
+  display: none;
+}
+
+/* Float the button over the page instead of reserving a bar's worth of
+   height, and let clicks through everywhere except the button. */
+.nav-container {
+  position: fixed;
+  pointer-events: none;
+}
+
+.nav-container nav {
+  height: auto;
+  padding: 0.75rem;
+}
+
+.hamburger-menu {
+  pointer-events: auto;
+}
+
+/* On desktop the sidebar is always visible, so nothing needs toggling - and
+   there is no navbar height for the sidebar to clear. */
+@media (min-width: 768px) {
+  .nav-container {
+    display: none;
+  }
+
+  .sidebar-container {
+    top: 0;
+    max-height: 100vh;
+  }
+}
+
+/* Sidebar hugs its content instead of the theme's fixed 16rem column. */
+.sidebar-container {
+  width: max-content;
+}
+
+/* The theme collapses a subtree by animating its height to 0, which leaves it
+   in flow - so its labels would still set the width above. Take collapsed
+   subtrees out of layout instead. Costs the open/close height animation. */
+.sidebar-container li:not(.open) > div {
+  display: none;
+}
+
+/* The Home link comes from [[menu.sidebar]], which the theme appends after the
+   page tree. Pull it back to the top of the flex column. Scoped to the
+   top-level list so nested page lists keep their weight ordering. */
+.sidebar-container > div > ul > li:last-child {
+  order: -1;
+}
+
+/* Blog's posts are excluded from the tree (see content/blog/_index.md), but
+   the theme still draws a collapse chevron because the section does have
+   pages - it even emits an empty <ul>, since it tests the page list before
+   applying the exclude filter. Drop the chevron where that list has no items. */
+.sidebar-container li:not(:has(> div > ul > li)) .hextra-sidebar-collapsible-button {
+  display: none;
+}
