@@ -55,9 +55,9 @@ To comply with regulations back then, the OS used to tell the card its region, a
 
 What it does is very simple: it scans the area, looks at the routers nearby, checks their country code (two bytes sent by the router) and, with a magic formula we will never know, automatically picks the region for you.
 
-Sounds smart on the surface. A shame it's unreliable as fuck for some people (picking Indonesian/Chinese regulations when living in the US). And here's the real kicker: even when it gets your country right, like it does for me, you're stuck with whatever the card decided. Old cards took the region from the OS and obeyed it, so you could just set it yourself. This one decides on its own and ignores you. There used to be a switch to turn LAR off, and it was removed from the kernel in 2019.
+Sounds smart on the surface. A shame it's unreliable as fuck for some people (picking Indonesian/Chinese regulations when living in the US). And here's the real kicker: even when it gets your country right, like it does for me, you're stuck with whatever the card decided, and you can't change it: there used to be a switch to turn LAR off, but Intel removed it in 2019.
 
-In very few words: **Intel believes that Italy can't make low 5 GHz hotspots** (unless I'm already connected to a router in the same band), while handing me six times the legal power on high 5 GHz, where Italy actually does have a limit.
+In very few words: **Intel believes my card can join a low 5 GHz network but never start one** (unless it's already connected to one in the same band), while handing me six times the legal power on high 5 GHz, where Italy actually does have a limit.
 
 "Why the bitching?" one might ask, and I'll let them in on a secret: Intel wifi cards are the best for Linux. They're the best supported. They have the best stability. Why Intel would do something like this to all of us geeks, we'll never know.
 
