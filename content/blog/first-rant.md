@@ -38,16 +38,15 @@ sheepy tested the patch with her AX210 and confirmed it worked. I couldn't test 
 
 ### Moloch or LAR
 
-Radio equipment has been in use for ages, for all sorts of purposes: entertainment, toys, communication, all sorta stuff. Ships and navies got there first, back when radio was just telegraphy through the air. Then airplanes, then the household radio set, then TV, etc. etc... And the more stuff piled onto the air, the more it all stepped on each other: in 1912 amateur chatter famously got in the way of the Titanic's distress calls, and the first real radio laws followed within months. Spectrum is shared and finite, and nobody gets to use it if everybody just transmits whatever they want. Therefore: **regulations**.
+Radio equipment has been in use for ages, for all sorts of purposes: entertainment, toys, communication, all sorta stuff. Ships and navies got there first, back when radio was just telegraphy through the air. Then airplanes, then the household radio set, then TV, etc. etc... And the more stuff piled onto the air, the more it all stepped on each other: in 1912, an amateur chatter famously got in the way of the Titanic's distress calls, and the first real radio laws followed within months. Spectrum is shared and finite, and nobody gets to use it if everybody just transmits whatever they want. Therefore: **regulations**.
 
 I'm not against them, don't get me wrong. I'm against Intel.
 
 Wifi has regulations too: some regions of the world let you have 5 GHz wifi, some don't, some only block a specific frequency... It's fairly complicated, but both routers and wifi cards have to comply somehow.
 
-Fun fact about me: I live in Italy, so I get EU rules, and the EU chops consumer, non specialized 5 GHz into pieces:
-- Low 5 GHz (channels 36 to 48) is the relaxed piece: no hoops, but **indoor only**, which is normal for, well, indoor use. Since 2022 Italy lets you take it outside too, as long as you're not a fixed installation.
-- The channels inbetween have to use some features to prevent interference.
-- High 5 GHz (channels 149 to 165) isn't a wifi band here. You can transmit, sure, at **an eighth** of the power, which is useless. It got written into the wifi standard at the end of 2024, but a standard isn't a law, and nobody changed the law.
+Fun fact about me: I live in Italy, so I get EU rules, and the EU chops consumer, non specialized (meaning no DFS) 5 GHz into two main pieces:
+- Low 5 GHz (channels 36 to 48) is the relaxed band: no quirks or hoops, but **indoor only**, which is normal for, well, indoor use. Since 2022 Italy lets you take it outside too, as long as you're not a fixed installation.
+- High 5 GHz (channels 149 to 165) isn't a wifi band. You can transmit, sure, at **an eighth** of the power, which is too weak for wifi transmission. The band got written into the wifi standard at the end of 2024, but a standard isn't a law, and nobody changed the law.
 
 What's the deal with all this sparse information? Why am I lecturing you about regulations? Well, because Intel fucked up bad.
 
@@ -55,27 +54,33 @@ To comply with regulations back then, the OS used to tell the card its region, a
 
 What it does is very simple: it scans the area, looks at the routers nearby, checks their country code (two bytes sent by the router) and, with a magic formula we will never know, automatically picks the region for you.
 
-Sounds smart on the surface. A shame it's unreliable as fuck for some people (picking Indonesian/Chinese regulations when living in the US). And here's the real kicker: even when it gets your country right, like it does for me, you're stuck with whatever the card decided, and you can't change it: there used to be a switch to turn LAR off, but Intel removed it in 2019.
+Sounds smart on the surface. A shame it's unreliable as fuck for some people (picking Indonesian/Chinese regulations when living in the US). And even when it gets your country right, like it does for me, you're stuck with whatever the card decided, and you can't change it: there used to be a switch to turn LAR off, but Intel removed it in 2019.
 
-In very few words: **Intel believes my card can join a low 5 GHz network but never start one** (unless it's already connected to one in the same band), while handing me six times the legal power on high 5 GHz, where Italy actually does have a limit.
+But technically, per regulations, I should be able to freely navigate the low 5 GHz band (you know, to make libdrc's default setup work), so why am I talking about this? Why would I want to disable that system? Why is LAR a problem for me?
 
-"Why the bitching?" one might ask, and I'll let them in on a secret: Intel wifi cards are the best for Linux. They're the best supported. They have the best stability. Why Intel would do something like this to all of us geeks, we'll never know.
+TLDR: **Intel believes my card can join a low 5 GHz network but never start one** (unless it's already connected to one in the same band), while handing me **SIX** times the legal power on high 5 GHz (essentially giving me the power to illegally start a network on the band).
+
+And I have reason to believe this is not just a problem for me, or Italy, but for all EU countries and citizens.
+
+"Why the bitching?" people might ask, and I'll let them in on a secret: Intel wifi cards are the best for Linux. They're the best supported. They have the best stability. Why Intel would do something like this to all of us geeks, we'll never know.
+
+Intel fucked up bad, and doesn't want to fix its problems. 
 
 #### Firmware RE tangent
 
 So what could I possibly do, if not get my hands dirty with machine code? Hehehe >:3
 
+TODO: WRITE THIS SECTION
+
 I'm too eepy to write this story right now, but my findings brought me to this:
 
 - For Italians who have the AC9560 card and have found a method to bypass its secure boot: open the file `iwlwifi-9000-pu-b0-jf-b0-46.ucode` (found in `/lib/firmware`) with your preferred hex editor and overwrite address `0xd3c67` with the number 2. This MIGHT solve all your problems.
-
-TODO: WRITE THIS SECTION
 
 ### Old regulations
 
 Well, that was a complete waste of time (for me at least).
 
-At least I have all the freedom regarding high 5 GHz networks... could that be useful in any way? Asking myself that, the next question came instantly: couldn't the Gamepad connect over high 5 GHz too?
+At least I have all the (illegal) freedom regarding high 5 GHz networks... could that be useful in any way? Asking myself that, the next question came instantly: couldn't the Gamepad connect over high 5 GHz too?
 
 No.
 
@@ -85,11 +90,13 @@ The problem is, sheepy could connect her Gamepad to her PC over high 5 GHz, and 
 
 TODO: WRITE THIS SECTION BETTER
 
-Why couldn't I connect? REGULATIONS, ALWAYS regulations. Every wifi device has to follow the rules of the region it's sold in, consoles included. Back in 2012 the regulations for high 5 GHz were stricter than they are now, and as covered above, in the EU that band wasn't a wifi band at all, so my European Gamepad straight up skips channels 149 to 165. I tested this to death. sheepy and Famidawg have US consoles, which got the whole band, and that is the entire reason it works for them and not for me.
+Why couldn't I connect? Well, if you've followed me this far, you should know high 5 GHz is not a wifi band in Europe, so of course european consoles won't even scan for those frequencies...
 
-Funny how Intel believes the opposite. On one hand I've got a modern device that thinks low 5 GHz is bad; on the other, an old device that thinks high 5 GHz is bad. FUUUUUUUUUUCKKKKKKKKKK
+Mind you: at this point of research I wasn't really aware of all the regulations, most of the info I've told here has been properly researched at the time of writing...
 
-I hope you can sympathize with my frustration.
+Well... Funny. On one hand I've got a modern device that makes illegal choices; on the other, an old device that ACTUALLY FOLLOWS EU REGULATIONS. FUUUUUUUUUUCCCCCCCKKKKKKKKKK
+
+I hope you can empathise with my frustration.
 
 ## Where am I at now?
 
@@ -99,6 +106,6 @@ From what I know, it could be a billion things: bad connectivity, bad TSF values
 
 So I thought: what can I remove from the equation?
 
-And, madman that I am, I decided to "reverse engineer" the Wii U's h264 codec. :D
+And, as the madman that I am, I decided to "reverse engineer" the Wii U's h264 codec. :D
 
 I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy I am not crazy 
