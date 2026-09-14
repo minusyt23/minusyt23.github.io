@@ -38,7 +38,7 @@ sheepy tested the patch with her AX210 and confirmed it worked. I couldn't test 
 
 ### Moloch or LAR
 
-Radio equipment has been in use for ages, for all sorts of purposes: entertainment, toys, communication, all sorta stuff. Ships and navies got there first, back when radio was just telegraphy through the air. Then airplanes, then the household radio set, then TV, etc. etc... And the more stuff piled onto the air, the more it all stepped on each other: in 1912, an amateur chatter famously got in the way of the Titanic's distress calls, and the first real radio laws followed within months. Spectrum is shared and finite, and nobody gets to use it if everybody just transmits whatever they want. Therefore: **regulations**.
+Radio equipment has been in use for ages, for all sorts of purposes: entertainment, toys, communication, all sorta stuff. Ships and navies got there first, back when radio was just telegraphy through the air. Then airplanes, then the household radio set, then TV, etc. etc... And the more stuff piled onto the air, the more it all stepped on each other: in 1912, amateur chatter famously got in the way of the Titanic's distress calls, and the first real radio laws followed within months. Spectrum is shared and finite, and nobody gets to use it if everybody just transmits whatever they want. Therefore: **regulations**.
 
 I'm not against them, don't get me wrong. I'm against Intel.
 
@@ -58,11 +58,12 @@ Sounds smart on the surface. A shame it's unreliable as fuck for some people (pi
 
 But technically, per regulations, I should be able to freely navigate the low 5 GHz band (you know, to make libdrc's default setup work), so why am I talking about this? Why would I want to disable that system? Why is LAR a problem for me?
 
-TLDR: **Intel believes my card can join a low 5 GHz network but never start one** (unless it's already connected to one in the same band), while handing me **SIX** times the legal power on high 5 GHz (essentially giving me the power to illegally start a network on the band).
-
+TL;DR: **Intel believes my card can join a low 5 GHz network but never start one**, while handing me **SIX** times the legal power on high 5 GHz (essentially giving me the power to illegally start a network on the band).  
 And I have reason to believe this is not just a problem for me, or Italy, but for all EU countries and citizens.
 
-"Why the bitching?" people might ask, and I'll let them in on a secret: Intel wifi cards are the best for Linux. They're the best supported. They have the best stability. Why Intel would do something like this to all of us geeks, we'll never know.
+That means that I can't really test my patch, because I can't start a low 5 GHz network with my Intel card, which is what you need to do to make libdrc work.
+
+"Why the bitching? Just use a different card!" people might ask, and I'll let them in on a secret: Intel wifi cards are the best for Linux. They're the best supported. They have the best stability. Why Intel would do something like this to all of us geeks, we'll never know.
 
 Intel fucked up bad, and doesn't want to fix its problems. 
 
@@ -86,11 +87,11 @@ No.
 
 I tried and tried, with both my Intel wifi card and my trusty wifi dongle (the one I use regularly for libdrc testing!), but no, hostapd got ignored every time.
 
-The problem is, sheepy could connect her Gamepad to her PC over high 5 GHz, and Famidawg even told me that Gamepads scan both low and high 5 GHz and pick the least congested (ofc).
+The problem is, sheepy could connect her Gamepad to her PC over high 5 GHz, and Famidawg even told me that Gamepads scan both low and high 5 GHz and pick the least congested (ofc). Both have american consoles.
 
 TODO: WRITE THIS SECTION BETTER
 
-Why couldn't I connect? Well, if you've followed me this far, you should know high 5 GHz is not a wifi band in Europe, so of course european consoles won't even scan for those frequencies...
+Why couldn't I connect? Well, if you've followed me so far, you should know high 5 GHz is not a wifi band in Europe, so of course european consoles won't even scan for those frequencies...
 
 Mind you: at this point of research I wasn't really aware of all the regulations, most of the info I've told here has been properly researched at the time of writing...
 
